@@ -18,31 +18,22 @@
 
 *****************************************************************************/
 
-#ifndef SVCVIEWER_H
-#define SVCVIEWER_H
+#ifndef SD_HANDLER_H
+#define SD_HANDLER_H
 
-#include <QMainWindow>
+//#include <Python.h>
+//#include <systemd/sd-bus.h>
+//#include <systemd/sd-event.h>
 
-QT_BEGIN_NAMESPACE
-namespace Ui {
-class svcviewer;
-}
-QT_END_NAMESPACE
+typedef void (*handler_callback)(void);
 
-class svcviewer : public QMainWindow
+class sd_handler
 {
-    Q_OBJECT
-
 public:
-    svcviewer(QWidget *parent = nullptr);
-    int updateSvcMonitorPane();
-    int updateStatus(const QString &mesg, const QString &style = "background-color: transparent;");
-    ~svcviewer();
-
-private slots:
-    void on_filter_clearAllButton_released();
-
+    sd_handler(handler_callback callback_);
+    int watch();
 private:
-    Ui::svcviewer *ui;
+    handler_callback callback;
 };
-#endif // SVCVIEWER_H
+
+#endif // SD_HANDLER_H

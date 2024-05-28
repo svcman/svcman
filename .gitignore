@@ -39,9 +39,6 @@ Thumbs.db
 *.pro.user*
 CMakeLists.txt.user*
 
-# xemacs temporary files
-*.flc
-
 # Vim temporary files
 .*.swp
 
@@ -67,8 +64,5 @@ CMakeLists.txt.user*
 # Python byte code
 *.pyc
 
-# Binaries
-# --------
-*.dll
-*.exe
-
+# Commonly generated files
+build/*
