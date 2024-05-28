@@ -5,6 +5,7 @@
 #### Build Dependencies
 
 ```
+sdbus-c++
 qt6-qtbase-devel
 gcc-c++
 libsystemd-dev

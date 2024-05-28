@@ -21,10 +21,6 @@
 #ifndef SD_HANDLER_H
 #define SD_HANDLER_H
 
-//#include <Python.h>
-//#include <systemd/sd-bus.h>
-//#include <systemd/sd-event.h>
-
 typedef void (*handler_callback)(void);
 
 class sd_handler

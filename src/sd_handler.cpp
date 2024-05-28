@@ -19,10 +19,21 @@
 *****************************************************************************/
 
 #include "sd_handler.h"
+#include <sdbus-c++/IConnection.h>
+#include <sdbus-c++/IProxy.h>
+//#include <sdbus-c++/sdbus-c++.h>
+
+using sdbus::ServiceName;
+using sdbus::ObjectPath;
+
+std::unique_ptr<sdbus::IConnection> conn;
+std::unique_ptr<sdbus::IProxy> proxy;
 
 sd_handler::sd_handler(handler_callback callback_) {
-    callback = callback_;
-    sd_bus *bus = nullptr;
+    ServiceName sd_service_name = ServiceName{"org.freedesktop.systemd1.Manager"};
+    ObjectPath sd_service_path = ObjectPath{"/org/freedesktop/systemd1"};
+    conn = sdbus::createSystemBusConnection();
+    proxy = sdbus::createProxy(*conn, sd_service_name, sd_service_path);
 }
 
 int sd_handler::watch() {
@@ -30,5 +41,5 @@ int sd_handler::watch() {
 }
 
 int fetch_latest() {
-
+    return 0;
 }

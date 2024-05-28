@@ -11,10 +11,11 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
+find_package(sdbus-c++ REQUIRED)
 
-pkg_check_modules(
-    SYSTEMD REQUIRED libsystemd
-)
+#pkg_check_modules(
+#    SYSTEMD REQUIRED libsystemd
+#)
 
 include_directories(${SYSTEMD_INCLUDE_DIRS})
 
@@ -40,7 +41,7 @@ endif()
 
 target_link_libraries(svcman
     PRIVATE Qt${QT_VERSION_MAJOR}::Widgets
-    PRIVATE ${SYSTEMD_LIBRARIES}
+    PRIVATE SDBusCpp::sdbus-c++
 )
 
 include(GNUInstallDirs)
