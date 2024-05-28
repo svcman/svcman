@@ -16,10 +16,14 @@
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout_2">
     <item row="0" column="0">
-     <widget class="QComboBox" name="comboBox"/>
+     <widget class="QComboBox" name="filter_unitTypeSelect">
+      <property name="placeholderText">
+       <string>Unit Type</string>
+      </property>
+     </widget>
     </item>
     <item row="0" column="7">
-     <widget class="QPushButton" name="pushButton_3">
+     <widget class="QPushButton" name="openSettingsPaneButton">
       <property name="toolTip">
        <string>Settings</string>
       </property>
@@ -32,10 +36,14 @@
      </widget>
     </item>
     <item row="0" column="4">
-     <widget class="QComboBox" name="comboBox_4"/>
+     <widget class="QComboBox" name="filter_substateSelect">
+      <property name="placeholderText">
+       <string>Substate</string>
+      </property>
+     </widget>
     </item>
     <item row="0" column="6">
-     <widget class="QPushButton" name="pushButton_2">
+     <widget class="QPushButton" name="manualRefreshButton">
       <property name="toolTip">
        <string>Manual refresh</string>
       </property>
@@ -48,13 +56,17 @@
      </widget>
     </item>
     <item row="0" column="3">
-     <widget class="QComboBox" name="comboBox_3"/>
+     <widget class="QComboBox" name="filter_stateSelect">
+      <property name="placeholderText">
+       <string>State</string>
+      </property>
+     </widget>
     </item>
     <item row="1" column="0" colspan="9">
-     <widget class="QColumnView" name="columnView"/>
+     <widget class="QColumnView" name="serviceListPane"/>
     </item>
     <item row="0" column="8">
-     <widget class="QPushButton" name="pushButton_4">
+     <widget class="QPushButton" name="openInfoPaneButton">
       <property name="toolTip">
        <string>About svcman</string>
       </property>
@@ -67,10 +79,14 @@
      </widget>
     </item>
     <item row="0" column="2">
-     <widget class="QComboBox" name="comboBox_2"/>
+     <widget class="QComboBox" name="filter_startupStateSelect">
+      <property name="placeholderText">
+       <string>Startup</string>
+      </property>
+     </widget>
     </item>
     <item row="0" column="5">
-     <widget class="QPushButton" name="pushButton">
+     <widget class="QPushButton" name="filter_clearAllButton">
       <property name="toolTip">
        <string>Reset filters</string>
       </property>
@@ -89,7 +105,7 @@
      </widget>
     </item>
     <item row="0" column="1">
-     <widget class="QLineEdit" name="lineEdit">
+     <widget class="QLineEdit" name="filter_customPattern">
       <property name="placeholderText">
        <string>Search terms</string>
       </property>

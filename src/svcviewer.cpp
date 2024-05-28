@@ -12,3 +12,9 @@ svcviewer::~svcviewer()
 {
     delete ui;
 }
+
+void svcviewer::on_filter_clearAllButton_released()
+{
+    ui->filter_customPattern->clear();
+}
+

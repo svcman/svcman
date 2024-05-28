@@ -17,6 +17,9 @@ public:
     svcviewer(QWidget *parent = nullptr);
     ~svcviewer();
 
+private slots:
+    void on_filter_clearAllButton_released();
+
 private:
     Ui::svcviewer *ui;
 };
