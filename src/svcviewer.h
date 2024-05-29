@@ -36,7 +36,7 @@ class svcviewer : public QMainWindow
 public:
     svcviewer(QWidget *parent = nullptr);
     int updateSvcMonitorPane();
-    int updateStatus(const QString &mesg, const QString &style = "background-color: transparent;");
+    int updateStatus(const std::string, const std::string);
     ~svcviewer();
 
 private slots:

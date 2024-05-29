@@ -37,10 +37,9 @@ int svcviewer::updateSvcMonitorPane() {
     return 0;
 }
 
-int updateStatus(const QString &mesg = "", const QString &style = "background-color: transparent;");
-int svcviewer::updateStatus(const QString &mesg, const QString &style) {
-    ui->statusbar->setStyleSheet(style);
-    ui->statusbar->showMessage(mesg);
+int svcviewer::updateStatus(const std::string mesg, const std::string style) {
+    ui->statusbar->setStyleSheet(QString::fromStdString(style));
+    ui->statusbar->showMessage(QString::fromStdString(mesg));
     return 0;
 }
 

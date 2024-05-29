@@ -31,6 +31,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
         src/sd_handler.h src/sd_handler.cpp
+        src/stdStyles.h
 
     )
 else()

@@ -22,10 +22,14 @@
 #include "sd_handler.h"
 #include <QApplication>
 
-const QString StatusStyle_Fatal = "background-color: darkred; color: lightgrey; font-weight: bold;";
+svcviewer* svcviewobj = nullptr;
 
-void sd_handler_callback() {
+int sd_handler_callback() {
+    return 0;
+}
 
+int status_update_callback(const std::string mesg, const std::string style) {
+    svcviewobj->updateStatus(mesg, style);
 }
 
 int main(int argc, char *argv[]) {
@@ -33,7 +37,8 @@ int main(int argc, char *argv[]) {
     svcviewer svcviewobj;
     svcviewobj.show();
 
-    sd_handler sd_obj(sd_handler_callback);
+    sd_handler sd_obj(&sd_handler_callback, &status_update_callback);
+    sd_obj.fetch_latest();
 
 
     return a.exec();

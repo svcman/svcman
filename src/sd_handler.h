@@ -21,15 +21,21 @@
 #ifndef SD_HANDLER_H
 #define SD_HANDLER_H
 
-typedef void (*handler_callback)(void);
+#include <functional>
 
 class sd_handler
 {
 public:
-    sd_handler(handler_callback callback_);
+    //sd_handler(svcviewer*, int (*)());
+    sd_handler(
+        const std::function<int()>&data_callback,
+        const std::function<int(const std::string, const std::string)>&status_callback
+    );
+    int fetch_latest();
     int watch();
 private:
-    handler_callback callback;
+    std::function<int()> data_callback;
+    std::function<int(const std::string, const std::string)> status_callback;
 };
 
 #endif // SD_HANDLER_H
