@@ -32,10 +32,9 @@ sd_handler::sd_handler(DataCallback data_callback, StatusCallback status_callbac
     , status_callback(status_callback)
     , sd_service_name(sdbus::ServiceName{"org.freedesktop.systemd1.Manager"})
     , sd_service_path(sdbus::ObjectPath{"/org/freedesktop/systemd1"})
-    {
-        conn = sdbus::createSessionBusConnection();
-        proxy = sdbus::createProxy(*conn, sd_service_name, sd_service_path);
-    }
+    , conn(sdbus::createSessionBusConnection())
+    , proxy(sdbus::createProxy(*conn, sd_service_name, sd_service_path))
+    {}
 
 int sd_handler::watch() {
     return 0;
@@ -69,7 +68,6 @@ int sd_handler::fetch_latest() {
     } catch (const sdbus::Error& e) {
         std::string message = "D-Bus error: " + e.getName() + " - " + e.getMessage();
         status_callback("test", "");
-        //callback();
     } catch (const std::exception& e) {
         std::cerr << "Error: " << e.what() << std::endl;
     }

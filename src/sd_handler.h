@@ -21,7 +21,6 @@
 #ifndef SD_HANDLER_H
 #define SD_HANDLER_H
 
-#include "svcmanRunner.h"
 #include <sdbus-c++/IConnection.h>
 #include <sdbus-c++/IProxy.h>
 
@@ -29,8 +28,8 @@ class sd_handler
 {
 public:
     //sd_handler(svcviewer*, int (*)());
-    using DataCallback = int (svcman::*)();
-    using StatusCallback = int (svcman::*)(std::string, std::string);
+    using DataCallback = int (*)();
+    using StatusCallback = int (*)(std::string, std::string);
     sd_handler(DataCallback data_callback, StatusCallback status_callback);
     int fetch_latest();
     int watch();
