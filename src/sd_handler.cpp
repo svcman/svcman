@@ -27,21 +27,15 @@
 #include <sdbus-c++/IProxy.h>
 //#include <sdbus-c++/sdbus-c++.h>
 
-sdbus::ServiceName sd_service_name = sdbus::ServiceName{"org.freedesktop.systemd1.Manager"};
-sdbus::ObjectPath sd_service_path = sdbus::ObjectPath{"/org/freedesktop/systemd1"};
-
-std::unique_ptr<sdbus::IConnection> conn;
-std::unique_ptr<sdbus::IProxy> proxy;
-
-sd_handler::sd_handler(
-    const std::function<int()>&data_callback,
-    const std::function<int(const std::string, const std::string)>&status_callback
-    ) {
-    conn = sdbus::createSessionBusConnection();
-    proxy = sdbus::createProxy(*conn, sd_service_name, sd_service_path);
-    this->data_callback = data_callback;
-    this->status_callback = status_callback;
-}
+sd_handler::sd_handler(DataCallback data_callback, StatusCallback status_callback)
+    : data_callback(data_callback)
+    , status_callback(status_callback)
+    , sd_service_name(sdbus::ServiceName{"org.freedesktop.systemd1.Manager"})
+    , sd_service_path(sdbus::ObjectPath{"/org/freedesktop/systemd1"})
+    {
+        conn = sdbus::createSessionBusConnection();
+        proxy = sdbus::createProxy(*conn, sd_service_name, sd_service_path);
+    }
 
 int sd_handler::watch() {
     return 0;

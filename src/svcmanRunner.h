@@ -18,29 +18,19 @@
 
 *****************************************************************************/
 
-#ifndef SD_HANDLER_H
-#define SD_HANDLER_H
+#ifndef svcmanRunner_H
+#define svcmanRunner_H
 
-#include "svcmanRunner.h"
-#include <sdbus-c++/IConnection.h>
-#include <sdbus-c++/IProxy.h>
+#include "svcviewer.h"
 
-class sd_handler
+class svcman
 {
 public:
-    //sd_handler(svcviewer*, int (*)());
-    using DataCallback = int (svcman::*)();
-    using StatusCallback = int (svcman::*)(std::string, std::string);
-    sd_handler(DataCallback data_callback, StatusCallback status_callback);
-    int fetch_latest();
-    int watch();
+    int run(int, char *[]);
+    int handler_callback();
+    int status_callback(const std::string, const std::string);
 private:
-    sdbus::ServiceName sd_service_name;
-    sdbus::ObjectPath sd_service_path;
-    std::unique_ptr<sdbus::IConnection> conn;
-    std::unique_ptr<sdbus::IProxy> proxy;
-    DataCallback data_callback;
-    StatusCallback status_callback;
+    svcviewer* svcviewobj;
 };
 
-#endif // SD_HANDLER_H
+#endif // svcmanRunner

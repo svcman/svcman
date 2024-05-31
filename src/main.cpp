@@ -18,28 +18,34 @@
 
 *****************************************************************************/
 
+#include "svcmanRunner.h"
 #include "svcviewer.h"
 #include "sd_handler.h"
 #include <QApplication>
 
-svcviewer* svcviewobj = nullptr;
-
-int sd_handler_callback() {
-    return 0;
-}
-
-int status_update_callback(const std::string mesg, const std::string style) {
-    svcviewobj->updateStatus(mesg, style);
-}
-
-int main(int argc, char *argv[]) {
+int svcman::run(int argc, char *argv[]) {
+    // Non-QApplication-related args should be removed by this point
     QApplication a(argc, argv);
-    svcviewer svcviewobj;
-    svcviewobj.show();
 
-    sd_handler sd_obj(&sd_handler_callback, &status_update_callback);
+    svcviewobj = new svcviewer();
+    svcviewobj->show();
+    sd_handler sd_obj(&svcman::handler_callback, &svcman::status_callback);
     sd_obj.fetch_latest();
 
 
     return a.exec();
+}
+
+int svcman::handler_callback() {
+    return 0;
+}
+
+int svcman::status_callback(const std::string mesg, const std::string style) {
+    svcviewobj->updateStatus(mesg, style);
+    return 0;
+}
+
+int main(int argc, char *argv[]) {
+    svcman *svcrunner = new svcman();
+    return svcrunner->run(argc, argv);
 }
