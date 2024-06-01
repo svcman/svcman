@@ -20,6 +20,7 @@
 
 #include "svcviewer.h"
 #include "sd_handler.h"
+#include "stdStyles.h"
 #include <QApplication>
 
 //devel / diag
@@ -37,6 +38,7 @@ int status_callback(const std::string mesg, const std::string style) {
 }
 
 int main(int argc, char *argv[]) {
+    QCoreApplication::setSetuidAllowed(true);
     QApplication a(argc, argv);
 
     svcviewobj = new svcviewer();

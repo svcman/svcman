@@ -30,9 +30,9 @@
 sd_handler::sd_handler(DataCallback data_callback, StatusCallback status_callback)
     : data_callback(data_callback)
     , status_callback(status_callback)
-    , sd_service_name(sdbus::ServiceName{"org.freedesktop.systemd1.Manager"})
+    , sd_service_name(sdbus::ServiceName{"org.freedesktop.systemd1"})
     , sd_service_path(sdbus::ObjectPath{"/org/freedesktop/systemd1"})
-    , conn(sdbus::createSessionBusConnection())
+    , conn(sdbus::createSystemBusConnection())
     , proxy(sdbus::createProxy(*conn, sd_service_name, sd_service_path))
     {}
 
@@ -56,7 +56,7 @@ int sd_handler::fetch_latest() {
             std::string  // UnitFileState
         >> loadedUnits;
 
-        proxy->callMethod("ListUnits")
+        proxy->callMethod("ListUnit")
             .onInterface(sd_service_name)
             .withTimeout(60000)
             .storeResultsTo(loadedUnits);
@@ -66,8 +66,9 @@ int sd_handler::fetch_latest() {
                 std::cout << "ID: " << id << ", Description: " << description << ", Active State: " << activeState << std::endl;
             }
     } catch (const sdbus::Error& e) {
-        std::string message = "D-Bus error: " + e.getName() + " - " + e.getMessage();
-        status_callback("test", "");
+        std::string errMsg = "D-Bus error: " + e.getName() + " - " + e.getMessage();
+        std::cerr << errMsg << std::endl;
+        status_callback(errMsg, VIEWER_STATUS_MESSAGE_STYLE_FATAL);
     } catch (const std::exception& e) {
         std::cerr << "Error: " << e.what() << std::endl;
     }
